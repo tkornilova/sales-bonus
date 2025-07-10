@@ -52,7 +52,14 @@ function analyzeSalesData(data, options) {
         products_sold: {},
     }));
 
-    // @TODO: Индексация продавцов и товаров для быстрого доступа
+    // Индексация продавцов и товаров для быстрого доступа
+    const sellerIndex = Object.fromEntries(sellerStats
+        .map(seller => [seller.id, seller])
+    );
+
+    const productIndex = Object.fromEntries(data.products
+        .map(product => [product.sku, product])
+    );
 
     // @TODO: Расчет выручки и прибыли для каждого продавца
 
