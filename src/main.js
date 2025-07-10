@@ -42,7 +42,15 @@ function analyzeSalesData(data, options) {
         throw new Error('Чего-то не хватает');
     }
 
-    // @TODO: Подготовка промежуточных данных для сбора статистики
+    // Подготовка промежуточных данных для сбора статистики
+    const sellerStats = data.sellers.map(seller => ({
+        id: seller.id,
+        name: `${seller.first_name} ${seller.last_name}`,
+        revenue: 0,
+        profit: 0,
+        sales_count: 0,
+        products_sold: {},
+    }));
 
     // @TODO: Индексация продавцов и товаров для быстрого доступа
 
