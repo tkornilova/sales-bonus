@@ -61,7 +61,27 @@ function analyzeSalesData(data, options) {
         .map(product => [product.sku, product])
     );
 
-    // @TODO: Расчет выручки и прибыли для каждого продавца
+    // Расчет выручки и прибыли для каждого продавца
+    data.purchase_records.forEach(record => { // Чек
+        const seller = sellerIndex[record.seller_id]; // Продавец
+
+        seller.sales_count++;
+        seller.revenue += record.total_amount;
+
+        // Расчёт прибыли для каждого товара
+        record.items.forEach(item => {
+            const product = productIndex[item.sku]; // Товар
+            const cost = product.purchase_price * item.quantity;
+            const revenue = calculateSimpleRevenue(item);
+            seller.profit += revenue - cost;
+
+            // Учёт количества проданных товаров
+            if (!seller.products_sold[item.sku]) {
+                seller.products_sold[item.sku] = 0;
+            }
+            seller.products_sold[item.sku] += item.quantity;
+        })
+    });
 
     // @TODO: Сортировка продавцов по прибыли
 
