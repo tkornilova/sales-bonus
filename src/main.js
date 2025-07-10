@@ -33,6 +33,8 @@ function calculateBonusByProfit(index, total, seller) {
  */
 function analyzeSalesData(data, options) {
     // Проверка входных данных
+    console.log(data.purchase_records.length)
+
     if (!data
         || !Array.isArray(data.sellers || data.products || data.purchase_records)
         || (data.sellers.length || data.products.length || data.purchase_records.length) === 0
