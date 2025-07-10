@@ -5,7 +5,9 @@
  * @returns {number}
  */
 function calculateSimpleRevenue(purchase, _product) {
-   // @TODO: Расчет прибыли от операции
+   // Расчет прибыли от операции
+   const discount = 1 - (purchase.discount / 100);
+   return purchase.sale_price * purchase.quantity * discount;
 }
 
 /**
